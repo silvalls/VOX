@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "degravador"
+version = "1.1.0"
+description = "Degravação automática local de áudios e vídeos em pt-BR com diarização, fiel e auditável."
+readme = "README.md"
+requires-python = ">=3.10,<3.13"
+license = { text = "GPL-3.0-or-later" }
+authors = [{ name = "Projeto Degravador" }]
+keywords = ["transcrição", "degravação", "whisper", "diarização", "pt-BR", "asr"]
+
+# Versões fixas por auditabilidade — ver a justificativa no topo do
+# requirements.txt, que é a fonte canônica (nota de GPU do PyTorch inclusive).
+# Mantenha as duas listas em sincronia.
+dependencies = [
+  "whisperx==3.8.6",
+  "faster-whisper==1.2.1",
+  "pyannote.audio==4.0.7",
+  "speechbrain==1.1.0",
+  "python-docx==1.2.0",
+  "fpdf2==2.8.7",
+  "pywebview==6.2.1",
+  "python-dotenv==1.2.2",
+  "numpy==2.5.0",
+  "torch==2.8.0",
+  "torchaudio==2.8.0",
+]
+
+[project.scripts]
+degravador = "degravador.cli:main"
+
+[project.gui-scripts]
+degravador-app = "degravador.app:main"
+
+[project.optional-dependencies]
+dev = ["pytest==9.1.1", "jiwer>=3"]
+
+[tool.setuptools.packages.find]
+include = ["degravador*"]
+
+[tool.setuptools.package-data]
+degravador = ["webui/*.html", "webui/*.css", "webui/*.js", "webui/*.png", "webui/*.jpg"]

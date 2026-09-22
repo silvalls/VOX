@@ -1,0 +1,14 @@
+{
+  "titulo": "TERMO DE DEGRAVAÇÃO",
+  "fonte": "Arial",
+  "tamanho_pt": 12,
+  "cor_hex": "000000",
+  "alinhamento": "justificado",
+  "papel": "A4",
+  "margens_cm": { "superior": 3, "esquerda": 3, "inferior": 2, "direita": 2 },
+  "espacamento_linhas": 1.5,
+  "recuo_primeira_linha_cm": 1.25,
+  "cor_realce_baixa_confianca_hex": "F2DEDE",
+  "paginacao": "superior_direita",
+  "termo_encerramento": "Documento produzido por processamento automatizado local (VOX), preservando a fala tal como registrada, sem intervenção de inteligência artificial generativa no conteúdo transcrito. A transcrição bruta, com timestamps por palavra e scores de confiança, encontra-se preservada no arquivo de mesmo nome com extensão .bruto.json, gerado junto a este documento, para fins de conferência e auditoria."
+}

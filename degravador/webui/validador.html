@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>VOX — Validador de integridade</title>
+<style>
+  :root {
+    --fundo:#0a0a14; --cartao:#17141f;
+    --marca-a:#f7b23c; --marca-b:#7b3fd6;
+    --grad:linear-gradient(100deg,#f7b23c,#c26bb0,#7b3fd6);
+    --texto:#ececf3; --suave:#a9a6bd; --borda:#2a2740;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:system-ui,Arial,sans-serif; color:var(--texto);
+         background:radial-gradient(1100px 650px at 22% -10%, #3a2a12 0%, var(--fundo) 55%),
+                    radial-gradient(900px 600px at 100% 120%, #241638 0%, transparent 60%),
+                    var(--fundo);
+         min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px; }
+  .cartao { background:var(--cartao); border:1px solid var(--borda); border-radius:16px;
+            box-shadow:0 20px 60px rgba(0,0,0,.45); width:min(720px,94vw); padding:32px 38px; }
+  h1 { font-size:22px; margin:0 0 4px;
+       background:var(--grad); -webkit-background-clip:text; background-clip:text;
+       -webkit-text-fill-color:transparent; }
+  .desc { color:var(--suave); font-size:14px; margin:0 0 24px; }
+  label { display:block; font-size:13px; color:#cfccdd; margin-bottom:6px; font-weight:600; }
+  button { font-size:14px; padding:11px 16px; border-radius:9px; border:1px solid var(--borda);
+           background:#241d36; color:var(--texto); cursor:pointer; }
+  button:hover { background:#2b2340; }
+  button.primario { background:var(--grad); color:#fff; border:0; font-weight:800; }
+  .mono { font-family:ui-monospace,Consolas,monospace; font-size:13px; word-break:break-all;
+          background:#191426; border:1px solid var(--borda); border-radius:8px; padding:10px 12px;
+          color:#d7d3e6; min-height:20px; }
+  textarea { width:100%; padding:10px 12px; border:1px solid var(--borda); border-radius:9px;
+             background:#191426; color:var(--texto); font-family:ui-monospace,Consolas,monospace;
+             font-size:13px; resize:vertical; min-height:60px; }
+  .campo { margin-bottom:18px; }
+  .res { margin-top:18px; padding:14px 16px; border-radius:10px; font-weight:800; font-size:16px;
+         display:none; }
+  .res.ok { background:#123a24; color:#79e6a2; border:1px solid #1f6b3f; }
+  .res.nao { background:#3a1220; color:#ff8298; border:1px solid #6b1f37; }
+  .voltar { display:inline-block; margin-top:22px; color:var(--suave); font-size:13px;
+            text-decoration:none; }
+  .voltar:hover { color:var(--texto); }
+  .arq { color:var(--suave); font-size:13px; margin-top:6px; }
+</style>
+</head>
+<body>
+  <div class="cartao">
+    <h1>Validador de integridade (SHA-256)</h1>
+    <p class="desc">Confirme que um arquivo não foi alterado: calcule o hash SHA-256 dele
+       e compare com o hash registrado no PDF da degravação. Se conferirem, a integridade
+       está intacta.</p>
+
+    <div class="campo">
+      <button type="button" id="btnArq" class="primario">Escolher arquivo e calcular hash</button>
+      <div class="arq" id="arqNome"></div>
+    </div>
+
+    <div class="campo">
+      <label>Hash calculado do arquivo</label>
+      <div class="mono" id="hashCalc">—</div>
+    </div>
+
+    <div class="campo">
+      <label>Hash esperado (copie do PDF da degravação)</label>
+      <textarea id="hashEsperado" placeholder="Cole aqui o Hash SHA-256 do original que consta no PDF"></textarea>
+    </div>
+
+    <button type="button" id="btnComparar" class="primario">Comparar</button>
+    <div class="res" id="res"></div>
+
+    <a class="voltar" href="index.html">&larr; Voltar</a>
+  </div>
+
+<script>
+  let hashCalc = '';
+  document.getElementById('btnArq').addEventListener('click', async () => {
+    const r = await window.pywebview.api.escolher_e_hash();
+    if (r && r.ok) {
+      hashCalc = (r.sha256 || '').toLowerCase();
+      document.getElementById('hashCalc').textContent = hashCalc;
+      document.getElementById('arqNome').textContent = 'Arquivo: ' + (r.arquivo || '');
+    } else if (r) {
+      document.getElementById('hashCalc').textContent = 'Erro: ' + (r.erro || '');
+    }
+  });
+
+  document.getElementById('btnComparar').addEventListener('click', () => {
+    const esperado = (document.getElementById('hashEsperado').value || '')
+                      .trim().toLowerCase().replace(/[^a-f0-9]/g, '');
+    const res = document.getElementById('res');
+    if (!hashCalc) { res.style.display='block'; res.className='res nao';
+                     res.textContent='Calcule o hash de um arquivo primeiro.'; return; }
+    if (!esperado) { res.style.display='block'; res.className='res nao';
+                     res.textContent='Cole o hash esperado (do PDF).'; return; }
+    res.style.display = 'block';
+    if (esperado === hashCalc) {
+      res.className = 'res ok';
+      res.textContent = '✓ CONFEREM — integridade intacta (o arquivo não foi alterado).';
+    } else {
+      res.className = 'res nao';
+      res.textContent = '✗ DIFEREM — o arquivo NÃO corresponde ao hash esperado.';
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+# VOX (pacote 'degravador') — dependências principais
+#
+# VERSÕES FIXAS (==), de propósito. O VOX grava 'versao_app', modelo e SHA-256
+# no metadata para fins de auditoria: a mesma degravação, refeita em outra
+# máquina, precisa dar o mesmo resultado. Dependência com faixa aberta quebra
+# essa promessa — a lista de idiomas com alinhamento, o comportamento do VAD e
+# a segmentação do align() mudam entre versões do whisperx.
+# Ao subir qualquer pino aqui, rode a suíte (pytest) e refaça uma degravação de
+# referência antes de empacotar.
+#
+# ATENÇÃO (GPU): a instalação do PyTorch depende da sua GPU/CUDA. A VERSÃO está
+# fixada abaixo; o BUILD (cu128/cu121/CPU) é escolhido pelo índice:
+#   - GPUs NVIDIA Blackwell (RTX 50xx, ex.: 5090) exigem CUDA 12.8+.
+#     Instale o torch/torchaudio ANTES deste arquivo, pelo índice oficial:
+#       pip install torch==2.8.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/cu128
+#   - GPUs mais antigas (4 GB alvo, ex.: GTX 1650 / RTX 3050): troque por cu121.
+#   - Sem GPU: pip install torch==2.8.0 torchaudio==2.8.0  (build CPU)
+#
+# Depois: pip install -r requirements.txt
+
+whisperx==3.8.6          # orquestra transcrição + alinhamento + diarização
+faster-whisper==1.2.1    # motor de transcrição (CTranslate2)
+pyannote.audio==4.0.7    # diarização
+speechbrain==1.1.0       # embeddings ECAPA (fusão de locutores em diarizacao.py)
+python-docx==1.2.0       # exportação DOCX oficial (ABNT + Manual de Redação)
+fpdf2==2.8.7             # exportação PDF (termo de degravação + relatório)
+pywebview==6.2.1         # janela nativa do aplicativo (degravador/app.py)
+python-dotenv==1.2.2     # carregar HF_TOKEN de .env
+numpy==2.5.0             # usado diretamente na fusão de locutores
+
+# torch / torchaudio: a versão é fixa, o build depende do índice (nota acima).
+torch==2.8.0
+torchaudio==2.8.0
+
+# O ffmpeg é requisito de SISTEMA (binários ffmpeg/ffprobe no PATH), não um
+# pacote Python: extracao.py os chama por subprocess. Não instale ffmpeg-python.

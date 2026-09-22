@@ -1,0 +1,114 @@
+﻿===============================================================================
+                      VOX - O QUE MUDOU EM CADA VERSÃO
+===============================================================================
+
+Este arquivo lista, em linguagem simples, o que muda de uma versão do VOX para a
+outra. A versão instalada aparece no rodapé de todo PDF de degravação, no campo
+"Versão do VOX".
+
+
+-------------------------------------------------------------------------------
+VERSÃO 1.1  -  22 de setembro de 2026
+-------------------------------------------------------------------------------
+
+Duas novidades em relação à versão 1.0.
+
+
+1) AVISO SOBRE A PLACA DE VÍDEO  (novo)
+
+   O VOX passou a conferir sozinho, toda vez que abre, a placa de vídeo e o
+   driver instalados na máquina. O resultado aparece numa faixa colorida no alto
+   da tela inicial:
+
+     VERDE     - a placa está pronta; a degravação vai na velocidade máxima.
+
+     AMARELA   - funciona, mas já existe um driver NVIDIA mais novo.
+                 Atualizar é opcional.
+
+     VERMELHA  - o driver é antigo demais e a placa NÃO será usada. O trabalho
+                 cai no processador e pode levar horas em vez de minutos. Um
+                 botão na própria faixa leva à página de download do driver.
+
+     CINZA     - não há placa NVIDIA nesta máquina. O VOX funciona normalmente
+                 pelo processador, apenas mais devagar.
+
+   POR QUE ISSO IMPORTA: antes, um driver desatualizado fazia o VOX cair para o
+   processador em silêncio. A degravação saía igual, mas demorava horas, e não
+   havia como a pessoa saber o motivo. Agora há.
+
+   A verificação é feita na própria máquina e nada é enviado para fora. Se
+   houver internet, o VOX ainda compara com a última versão publicada pela
+   NVIDIA (GeForce, RTX/Quadro ou Data Center, conforme a placa); sem internet,
+   ele apenas confere se o driver atende ao mínimo necessário.
+
+
+2) CORRIGIR QUEM FALOU O QUE, NA CONFERÊNCIA  (novo)
+
+   A separação automática de vozes às vezes erra - e errava nos dois sentidos,
+   sem que houvesse como consertar:
+
+     - juntava DUAS pessoas num mesmo interlocutor;
+     - PICOTAVA a fala de uma pessoa só em vários interlocutores.
+
+   Na versão 1.0 dava para renomear e mesclar interlocutores. Agora a correção é
+   completa. No painel de baixo (Correção), cada trecho ganhou uma caixa com o
+   nome do interlocutor e dois botões, que aparecem ao passar o mouse:
+
+     SEPARAR  - clique no texto, no ponto exato em que a outra pessoa começa a
+                falar, e clique em "separar" (ou tecle Shift+Enter). O trecho
+                vira dois e você escolhe o interlocutor de cada parte. O VOX
+                acerta o tempo do corte pelo áudio.
+
+     JUNTAR   - aglutina o trecho ao de cima, formando uma fala única. Serve
+                para quando a fala de uma pessoa só foi picotada.
+
+   Além disso:
+
+     - TROCAR de interlocutor: basta escolher outro nome na caixa do trecho.
+     - CRIAR um interlocutor que a máquina não separou (botão "Novo
+       interlocutor", ou a opção "novo interlocutor" na caixa do trecho).
+     - MESCLAR dois rótulos que são a mesma pessoa, no documento inteiro.
+     - DESFAZER: o botão "desfazer", no alto, volta atrás em cada separação,
+       aglutinação ou troca de interlocutor.
+
+   TRANSPARÊNCIA: tudo o que você separar, juntar ou reatribuir sai listado, um
+   a um, no relatório de conferência - junto com os interlocutores criados e os
+   rótulos mesclados. O painel de cima continua intocado, preservando a
+   transcrição e a divisão de vozes exatamente como a máquina entregou.
+
+
+O QUE NÃO MUDOU
+
+   - A qualidade da transcrição: mesmo modelo, mesmo resultado.
+   - A fidelidade: nenhuma inteligência artificial reescreve a fala. As
+     correções continuam sendo 100% suas.
+   - A privacidade: todo o processamento segue acontecendo na sua máquina.
+   - Os documentos gerados e o validador de integridade (hash SHA-256).
+   - O jeito de instalar e de usar o resto do programa.
+
+   Degravações feitas na versão 1.0 continuam válidas e podem ser conferidas
+   normalmente.
+
+
+-------------------------------------------------------------------------------
+VERSÃO 1.0  -  9 de setembro de 2026
+-------------------------------------------------------------------------------
+
+Primeira versão distribuída em instalador.
+
+   - Degravação local de áudio e vídeo, sem internet, sem conta e sem senha de
+     administrador.
+   - Identificação automática de quem falou o que e quando.
+   - Marcações de fidelidade: [inaudível], [vozes sobrepostas] e realce dos
+     trechos em que a máquina teve baixa confiança.
+   - Tela de conferência: ouvir o áudio, acompanhar palavra por palavra e
+     corrigir o texto, com rascunho salvo automaticamente.
+   - Nomear e mesclar interlocutores.
+   - PDF oficial da degravação (formato ABNT), PDF corrigido pós-conferência e
+     relatório comparativo das alterações.
+   - Seis idiomas de fala: português, espanhol, inglês, francês, alemão e
+     italiano.
+   - Legendas opcionais (SRT/VTT) para vídeo.
+   - Validador de integridade por hash SHA-256.
+
+===============================================================================

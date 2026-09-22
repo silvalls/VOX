@@ -1,0 +1,16 @@
+# Vocabulário de contexto — exemplo (crime ambiental / PF).
+# Um termo por linha ou separados por vírgula. '#' = comentário.
+# Ajuste livremente para o seu caso; nomes próprios recorrentes ajudam muito.
+
+# Termos que costumam ser mal grafados
+ocorrência
+grileiro, grilagem, grileiros
+queimada, incêndio florestal
+nascente, Cerrado, vegetação
+
+# Siglas e órgãos
+FUNAI, MPI, Ibram, IBAMA, DPU, SEMA, Terracap, DF Legal
+Ministério Público, Polícia Federal, Corpo de Bombeiros
+
+# Nomes / etnias / locais do caso
+Chacriabá, Canela, Paranoaçu, Porto Seguro, Lago Norte

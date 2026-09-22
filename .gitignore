@@ -1,0 +1,74 @@
+# ==========================================================================
+# SEGREDOS — nunca versionar
+# ==========================================================================
+.env
+*.token
+
+# ==========================================================================
+# Python
+# ==========================================================================
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+
+# ==========================================================================
+# Modelos e pesos (baixados sob demanda; nunca versionar)
+# ==========================================================================
+*.pt
+*.ckpt
+*.safetensors
+models/
+modelos/
+
+# ==========================================================================
+# Artefatos de empacotamento (gigabytes)
+# ==========================================================================
+empacotar/dist/
+empacotar/build/
+empacotar/modelos/
+empacotar/ffmpeg/
+empacotar/saida_instalador/
+empacotar/entrega/
+*.bin
+*.spec.bak
+
+# Pasta de preparo do repositório (cópia do que vai para o GitHub)
+Github/
+
+# ==========================================================================
+# Mídia e saídas de teste (pesadas e específicas da máquina)
+# ==========================================================================
+*.wav
+*.mp3
+*.mp4
+*.mkv
+*.m4a
+*.aac
+*.flac
+*.ogg
+*.opus
+*.webm
+saidas_teste/
+áudio testes/
+tests/audios_referencia/
+
+# ==========================================================================
+# Material que não é software
+# ==========================================================================
+Modelo rubina/
+Apresentação Congresso/
+*.pptx
+
+# ==========================================================================
+# Editores / SO
+# ==========================================================================
+.idea/
+.vscode/
+Thumbs.db
+.DS_Store
